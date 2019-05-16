@@ -1,41 +1,68 @@
-const todoInput = document.getElementById("todo-input");
-const addTaskButton = document.querySelector("#add-task");
-const listSection = document.getElementById("list-section");
+let input = document.querySelector("input");
+let addTaskButton = document.querySelector("button");
+let ul = document.querySelector("ul");
+let deleteButton = document.querySelector("img");
+let item = document.querySelector("li");
 
-addTaskButton.addEventListener("click", function(e){
+console.log(input);
+console.log(addTaskButton);
+console.log(ul);
+
+function addNewItem(e){
     e.preventDefault();
+    if(input.value.length > 0){
 
-    //create elements
-    const div = document.createElement("div");
-    const li = document.createElement("li");
-    const deleteButton = document.createElement("a");
+        //create elements
+        li = document.createElement("li");
+        li.textContent = input.value;
+        img = document.createElement("img");
+        img.src = "trash-2.svg";
+        
+        //add elements to DOM
+        li.appendChild(img);
+        ul.appendChild(li);
 
-    //appending elements to DOM 
-    div.appendChild(li);
-    div.appendChild(deleteButton);    
-    listSection.appendChild(div);
+        //handle deleting items
+       img.addEventListener("click", removeItem);
+}
+}
 
-    //adding content to created DOM elements
-    deleteButton.textContent = "Delete";
-    li.textContent = todoInput.value;
-    
-    //adding css styles classes to created DOM elements
-    div.classList.add("todo-lists");
-    listSection.classList.add("todo");
-    deleteButton.classList.add("delete");
+addTaskButton.addEventListener("click", addNewItem);
+document.body.onkeypress = function(e){
+    if(e.keyCode == 13){
+        addNewItem();
+    }
+}
 
-})
+function removeItem(e) {
+    e.target.parentElement.remove();
+  }
 
-//removing todos
-const div = document.createElement("div");
-const li = document.createElement("li");
-const deleteButton = document.createElement("a");
 
-deleteButton.addEventListener("click", function(){
-    deleteButton.parentElement.remove();
-    event.stopPropagation();
-    console.log("yay");
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
